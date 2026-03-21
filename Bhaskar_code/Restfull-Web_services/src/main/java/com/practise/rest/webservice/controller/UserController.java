@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.practise.rest.webservice.entity.Posts;
 import com.practise.rest.webservice.entity.Users;
 import com.practise.rest.webservice.exception.UserNotFoundException;
 import com.practise.rest.webservice.service.UserJPAService;
@@ -61,6 +63,33 @@ public class UserController {
 		Users savedUser = service.saveUser(user);
 
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId())
+				.toUri();
+		return ResponseEntity.created(location).build();
+	}
+
+	@GetMapping("/users/{id}/posts")
+	public List<Posts> retrievePostByUserId(@PathVariable long id) {
+		Optional<Users> users = service.findById(id);
+
+		if (users.isEmpty()) {
+			throw new UserNotFoundException("Id ::: " + id);
+		}
+
+		return users.get().getPosts();
+	}
+
+	@PostMapping("/users/{id}/posts")
+	public ResponseEntity<Posts> createPostForParticularUser(@PathVariable long id, @RequestBody Posts posts) {
+
+		Optional<Users> users = service.findById(id);
+
+		if (users.isEmpty()) {
+			throw new UserNotFoundException("Id ::: " + id);
+		}
+		
+		Posts savePost = service.savePost(posts);
+
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savePost.getId())
 				.toUri();
 		return ResponseEntity.created(location).build();
 	}

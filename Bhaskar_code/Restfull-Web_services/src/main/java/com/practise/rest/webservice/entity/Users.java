@@ -1,12 +1,16 @@
 package com.practise.rest.webservice.entity;
 
 import java.time.LocalDate;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,6 +26,10 @@ public class Users {
 
 	@Column(name = "birth_date")
 	private LocalDate birthDate;
+	
+	@OneToMany(mappedBy = "users")
+	 @JsonIgnore
+	private List<Posts> posts;
 
 	public Users(long id, String name, LocalDate birthDate) {
 		super();
@@ -62,5 +70,15 @@ public class Users {
 	public Users(){
 		
 	}
+
+	public List<Posts> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Posts> posts) {
+		this.posts = posts;
+	}
+	
+	
 
 }

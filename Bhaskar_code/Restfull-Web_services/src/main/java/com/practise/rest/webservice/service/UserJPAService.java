@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.practise.rest.webservice.dao.PostRepository;
 import com.practise.rest.webservice.dao.UserRepository;
+import com.practise.rest.webservice.entity.Posts;
 import com.practise.rest.webservice.entity.Users;
 
 @Service
@@ -14,6 +16,9 @@ public class UserJPAService {
 
 	@Autowired
 	private UserRepository repository;
+	
+	@Autowired
+	private PostRepository postRepository;
 
 	public List<Users> findAll() {
 		return repository.findAll();
@@ -26,6 +31,10 @@ public class UserJPAService {
 
 	public Users saveUser(Users users) {
 		return repository.save(users);
+	}
+
+	public Posts savePost(Posts posts) {
+		return postRepository.save(posts);
 	}
 
 	public void deleteUsers(long id) {
