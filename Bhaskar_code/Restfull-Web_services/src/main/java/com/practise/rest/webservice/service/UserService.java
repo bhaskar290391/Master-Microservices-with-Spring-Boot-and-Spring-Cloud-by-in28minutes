@@ -18,4 +18,12 @@ public class UserService {
 		usersData.add(new Users(2, "Sammy", LocalDate.now().minusYears(14)));
 		usersData.add(new Users(3, "kanishk", LocalDate.now().minusYears(20)));
 	}
+
+	public List<Users> findAll() {
+		return usersData;
+	}
+
+	public Users findById(int id) {
+		return usersData.stream().filter(user -> user.getId() == id).findFirst().get();
+	}
 }
