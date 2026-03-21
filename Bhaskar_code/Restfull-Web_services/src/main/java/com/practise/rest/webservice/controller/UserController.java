@@ -3,9 +3,9 @@ package com.practise.rest.webservice.controller;
 import java.net.URI;
 import java.util.List;
 
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.practise.rest.webservice.entity.Users;
+import com.practise.rest.webservice.exception.UserNotFoundException;
 import com.practise.rest.webservice.service.UserService;
 
 @RestController
@@ -34,7 +35,24 @@ public class UserController {
 
 	@GetMapping("/users/{id}")
 	public Users retrieveUserById(@PathVariable int id) {
-		return service.findById(id);
+		Users users = service.findById(id);
+
+		if (users == null) {
+			throw new UserNotFoundException("Id ::: " + id);
+		}
+
+		return users;
+	}
+
+	@DeleteMapping("/users/{id}")
+	public void deleteUserById(@PathVariable int id) {
+		Users users = service.findById(id);
+
+		if (users == null) {
+			throw new UserNotFoundException("Id ::: " + id);
+		}
+
+		service.deleteUsers(id);
 	}
 
 	@PostMapping("/users")

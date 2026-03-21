@@ -3,6 +3,7 @@ package com.practise.rest.webservice.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.springframework.stereotype.Service;
 
@@ -26,12 +27,17 @@ public class UserService {
 	}
 
 	public Users findById(int id) {
-		return usersData.stream().filter(user -> user.getId() == id).findFirst().get();
+		return usersData.stream().filter(user -> user.getId() == id).findFirst().orElse(null);
 	}
 
 	public Users saveUser(Users users) {
 		users.setId(++userCount);
 		usersData.add(users);
 		return users;
+	}
+
+	public void deleteUsers(int id) {
+		Predicate<? super Users> predicate = user -> user.getId() == id;
+		usersData.removeIf(predicate);
 	}
 }
