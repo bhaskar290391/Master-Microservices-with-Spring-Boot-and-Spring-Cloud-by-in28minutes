@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.practise.rest.webservice</groupId>
-	<artifactId>Restfull-Web_services</artifactId>
+	<artifactId>Restfull-Web-services</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name/>
 	<description/>

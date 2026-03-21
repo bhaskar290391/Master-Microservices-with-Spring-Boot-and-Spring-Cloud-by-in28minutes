@@ -2,6 +2,7 @@ package com.practise.rest.webservice.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,16 +16,15 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.practise.rest.webservice.entity.Users;
 import com.practise.rest.webservice.exception.UserNotFoundException;
-import com.practise.rest.webservice.service.UserService;
+import com.practise.rest.webservice.service.UserJPAService;
 
 @RestController
 public class UserController {
 
-	private UserService service;
+	private UserJPAService service;
 
 	@Autowired
-	public UserController(UserService service) {
-
+	public UserController(UserJPAService service) {
 		this.service = service;
 	}
 
@@ -34,21 +34,21 @@ public class UserController {
 	}
 
 	@GetMapping("/users/{id}")
-	public Users retrieveUserById(@PathVariable int id) {
-		Users users = service.findById(id);
+	public Users retrieveUserById(@PathVariable long id) {
+		Optional<Users> users = service.findById(id);
 
-		if (users == null) {
+		if (users.isEmpty()) {
 			throw new UserNotFoundException("Id ::: " + id);
 		}
 
-		return users;
+		return users.get();
 	}
 
 	@DeleteMapping("/users/{id}")
-	public void deleteUserById(@PathVariable int id) {
-		Users users = service.findById(id);
+	public void deleteUserById(@PathVariable long id) {
+		Optional<Users> users = service.findById(id);
 
-		if (users == null) {
+		if (users.isEmpty()) {
 			throw new UserNotFoundException("Id ::: " + id);
 		}
 
