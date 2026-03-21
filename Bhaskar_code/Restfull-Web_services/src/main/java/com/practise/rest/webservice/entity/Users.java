@@ -4,23 +4,23 @@ import java.time.LocalDate;
 
 public class Users {
 
-	private long Id;
+	private long id;
 	private String name;
 	private LocalDate birthDate;
 
 	public Users(long id, String name, LocalDate birthDate) {
 		super();
-		Id = id;
+		this.id = id;
 		this.name = name;
 		this.birthDate = birthDate;
 	}
 
 	public long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(long id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getName() {
@@ -41,7 +41,7 @@ public class Users {
 
 	@Override
 	public String toString() {
-		return "Users [Id=" + Id + ", name=" + name + ", birthDate=" + birthDate + "]";
+		return "Users [Id=" + id + ", name=" + name + ", birthDate=" + birthDate + "]";
 	}
 
 }
