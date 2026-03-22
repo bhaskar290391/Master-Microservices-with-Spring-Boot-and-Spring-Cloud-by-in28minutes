@@ -20,6 +20,8 @@ import com.practise.rest.webservice.entity.Users;
 import com.practise.rest.webservice.exception.UserNotFoundException;
 import com.practise.rest.webservice.service.UserJPAService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class UserController {
 
@@ -58,7 +60,7 @@ public class UserController {
 	}
 
 	@PostMapping("/users")
-	public ResponseEntity<Users> createUsers(@RequestBody Users user) {
+	public ResponseEntity<Users> createUsers(@Valid @RequestBody Users user) {
 
 		Users savedUser = service.saveUser(user);
 
@@ -79,14 +81,14 @@ public class UserController {
 	}
 
 	@PostMapping("/users/{id}/posts")
-	public ResponseEntity<Posts> createPostForParticularUser(@PathVariable long id, @RequestBody Posts posts) {
+	public ResponseEntity<Posts> createPostForParticularUser(@PathVariable long id, @Valid @RequestBody Posts posts) {
 
 		Optional<Users> users = service.findById(id);
 
 		if (users.isEmpty()) {
 			throw new UserNotFoundException("Id ::: " + id);
 		}
-		
+
 		Posts savePost = service.savePost(posts);
 
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savePost.getId())

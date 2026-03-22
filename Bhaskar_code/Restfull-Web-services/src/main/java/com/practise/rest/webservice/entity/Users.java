@@ -12,23 +12,27 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "user_details")
 public class Users {
 
 	@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	// @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
+	@Size(min = 2, message = "Atleast two characters")
 	@Column(name = "name")
 	private String name;
 
+	@Past(message = "Birthdate should be past")
 	@Column(name = "birth_date")
 	private LocalDate birthDate;
-	
+
 	@OneToMany(mappedBy = "users")
-	 @JsonIgnore
+	@JsonIgnore
 	private List<Posts> posts;
 
 	public Users(long id, String name, LocalDate birthDate) {
@@ -66,9 +70,9 @@ public class Users {
 	public String toString() {
 		return "Users [Id=" + id + ", name=" + name + ", birthDate=" + birthDate + "]";
 	}
-	
-	public Users(){
-		
+
+	public Users() {
+
 	}
 
 	public List<Posts> getPosts() {
@@ -78,7 +82,5 @@ public class Users {
 	public void setPosts(List<Posts> posts) {
 		this.posts = posts;
 	}
-	
-	
 
 }

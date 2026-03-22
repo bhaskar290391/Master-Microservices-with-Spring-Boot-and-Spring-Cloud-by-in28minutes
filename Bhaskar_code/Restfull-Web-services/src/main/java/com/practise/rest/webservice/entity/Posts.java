@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "posts")
@@ -18,11 +19,12 @@ public class Posts {
 	@GeneratedValue
 	private int id;
 
+	@Size(min = 2, message = "Atleast Two charecters")
 	@Column(name = "description")
 	private String description;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	 @JsonIgnore
+	@JsonIgnore
 	private Users users;
 
 	public Posts() {
