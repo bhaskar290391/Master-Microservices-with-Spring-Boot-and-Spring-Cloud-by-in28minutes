@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +22,7 @@ import com.practise.rest.webservice.entity.Posts;
 import com.practise.rest.webservice.entity.Users;
 import com.practise.rest.webservice.exception.UserNotFoundException;
 import com.practise.rest.webservice.service.UserJPAService;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 import jakarta.validation.Valid;
 
@@ -38,14 +42,20 @@ public class UserController {
 	}
 
 	@GetMapping("/users/{id}")
-	public Users retrieveUserById(@PathVariable long id) {
-		Optional<Users> users = service.findById(id);
+	public EntityModel<Users> retrieveUserById(@PathVariable long id) {
+		Users users = service.findById(id).get();
 
-		if (users.isEmpty()) {
+		if (users == null) {
 			throw new UserNotFoundException("Id ::: " + id);
 		}
 
-		return users.get();
+		EntityModel<Users> entityModel = EntityModel.of(users);
+
+		WebMvcLinkBuilder builder = linkTo(methodOn(this.getClass()).retrieveAllUsers());
+
+		entityModel.add(builder.withRel("all-users"));
+
+		return entityModel;
 	}
 
 	@DeleteMapping("/users/{id}")
