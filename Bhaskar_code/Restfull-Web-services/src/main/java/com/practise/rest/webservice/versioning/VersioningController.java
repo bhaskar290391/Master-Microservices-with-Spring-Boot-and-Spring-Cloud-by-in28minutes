@@ -37,12 +37,12 @@ public class VersioningController {
 	}
 	
 	
-	@GetMapping(path = "/persons", produces = "application/test1")
+	@GetMapping(path = "/persons", produces = "applications/test1")
 	public PersonV1 versioningPerson1UsingHeaderAccept() {
 		return new PersonV1("Bhaskar Mudaliyar");
 	}
 
-	@GetMapping(path = "/persons", produces = "application/test2")
+	@GetMapping(path = "/persons", produces = "applications/test2")
 	public PersonV2 versioningPerson2UsingHeaderAccept() {
 		return new PersonV2(new Name("Bhaskar", " Mudaliyar"));
 	}
