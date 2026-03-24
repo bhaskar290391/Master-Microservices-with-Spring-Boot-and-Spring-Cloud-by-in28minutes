@@ -9,16 +9,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.practise.microservice.currencyexchange.entity.CurrencyExchange;
+import com.practise.microservice.currencyexchange.entity.CurrencyExchangeRepo;
 
 @RestController
 public class CurrencyExchangeController {
 
 	@Autowired
+	private CurrencyExchangeRepo repo;
+	
+	@Autowired
 	private Environment environment;
 
 	@GetMapping("/currency-exchange/from/{from}/to/{to}")
 	public CurrencyExchange retrieveCurrencyData(@PathVariable String from, @PathVariable String to) {
-		CurrencyExchange currencyExchange = new CurrencyExchange(1000l, from, to, BigDecimal.valueOf(55));
+		CurrencyExchange currencyExchange = repo.findByFromAndTo(from, to);
 		String property = environment.getProperty("local.server.port");
 		currencyExchange.setEnvironment(property);
 		return currencyExchange;
