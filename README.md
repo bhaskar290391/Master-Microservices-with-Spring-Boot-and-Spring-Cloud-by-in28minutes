@@ -24,3 +24,7 @@ Port: 8765
 
 7. Zipkin Distributed Tracing Server
 Port: 9411
+
+
+#URL
+http://localhost:8000/currency-exchange/from/USD/to/INR
