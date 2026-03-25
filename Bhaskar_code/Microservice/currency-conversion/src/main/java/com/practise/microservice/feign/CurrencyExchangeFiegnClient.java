@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.practise.microservice.entity.CurrencyConversion;
 
 
-@FeignClient(name = "currency-exchange", url = "localhost:8000")
+//@FeignClient(name = "currency-exchange", url = "localhost:8000")
+@FeignClient(name = "currency-exchange")
 public interface CurrencyExchangeFiegnClient {
 
 	@GetMapping("/currency-exchange/from/{from}/to/{to}")
