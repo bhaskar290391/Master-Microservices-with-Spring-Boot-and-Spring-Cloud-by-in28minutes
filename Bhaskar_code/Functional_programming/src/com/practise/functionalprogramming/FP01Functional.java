@@ -7,8 +7,19 @@ public class FP01Functional {
 	public static void main(String[] args) {
 
 		List<Integer> numbers = List.of(24, 23, 12, 4, 25, 19, 4, 5, 7, 87, 18, 12);
-	//	printAllNumberFromListFunctional(numbers);
-		printAllEvenNumberFromListFunctional(numbers);
+		List<String> courses = List.of("Spring", "Spring Boot", "API", "Microservices", "AWS", "PCF", "Azure", "Docker",
+				"Kubernetes");
+
+		// printAllNumberFromListFunctional(numbers);
+		// printAllEvenNumberFromListFunctional(numbers);
+
+		// numbers.stream().filter(number -> number % 2 !=
+		// 0).forEach(System.out::println);
+
+		// courses.stream().forEach(System.out::println);
+		courses.stream().filter(course -> course.contains("Spring")).forEach(System.out::println);
+
+		courses.stream().filter(course -> course.length() > 4).forEach(System.out::println);
 
 	}
 
