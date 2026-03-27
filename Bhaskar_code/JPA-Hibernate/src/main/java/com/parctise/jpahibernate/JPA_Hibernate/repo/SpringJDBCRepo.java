@@ -1,6 +1,7 @@
 package com.parctise.jpahibernate.JPA_Hibernate.repo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -19,14 +20,24 @@ public class SpringJDBCRepo {
 	public static String DELETE_QUERY = """
 			DELETE FROM COURSE WHERE ID =?
 			""";
+	
+	public static String SELECT_QUERIES="""
+			SELECT * from COURSE WHERE ID=? 
+			""";
 
-	public void insert(Course course) {
+	public void save(Course course) {
 		template.update(INSERT_QUERY, course.getId(),course.getName(),course.getAuthor());
 
 	}
 
-	public void delete(long id) {
+	public void deleteById(long id) {
 		template.update(DELETE_QUERY,id);
-
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Course findById(long id) {
+		Course query = (Course) template.queryForObject(SELECT_QUERIES, new BeanPropertyRowMapper(Course.class), id);
+		
+		return  query;
 	}
 }
