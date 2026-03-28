@@ -6,17 +6,17 @@ import org.junit.jupiter.api.Test;
 
 class MyMathTest {
 
+	private MyMath test = new MyMath();
+
 	@Test
-	void test() {
-		MyMath test= new MyMath();
-		
-		int num[]= {1,2,3};
-		
-		
-		int sum=test.calculateSum(num);
-		int expectedResult =6;
-		
-		assertEquals(expectedResult, sum);
+	void calculateSum_ThreeMembersArrays() {
+
+		assertEquals(6, test.calculateSum(new int[] { 1, 2, 3 }));
 	}
 
+	@Test
+	void calculateSum_ZeroMembersArrays() {
+
+		assertEquals(0, test.calculateSum(new int[] {  }));
+	}
 }
