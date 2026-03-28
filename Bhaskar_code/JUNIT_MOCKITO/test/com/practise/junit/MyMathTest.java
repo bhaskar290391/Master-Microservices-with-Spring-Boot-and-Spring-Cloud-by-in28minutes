@@ -1,0 +1,22 @@
+package com.practise.junit;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class MyMathTest {
+
+	@Test
+	void test() {
+		MyMath test= new MyMath();
+		
+		int num[]= {1,2,3};
+		
+		
+		int sum=test.calculateSum(num);
+		int expectedResult =6;
+		
+		assertEquals(expectedResult, sum);
+	}
+
+}
