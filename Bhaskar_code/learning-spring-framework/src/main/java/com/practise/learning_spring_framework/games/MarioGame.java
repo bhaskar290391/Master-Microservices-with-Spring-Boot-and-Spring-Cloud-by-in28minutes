@@ -1,5 +1,8 @@
 package com.practise.learning_spring_framework.games;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class MarioGame implements GamingConsoleInterface{
 
 	public void up() {
