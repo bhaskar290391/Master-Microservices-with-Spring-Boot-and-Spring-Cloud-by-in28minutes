@@ -14,6 +14,6 @@ public class CourseController {
 	@GetMapping("/courses")
 	public List<Course> retrieveCourseData(){
 		
-		return Arrays.asList(new Course(1, "Learn AWs", "Bhaskar mUdaliyar"),new Course(1, "Learn Java", "Bhaskar mUdaliyar"));
+		return Arrays.asList(new Course(1, "Learn AWs", "Bhaskar mUdaliyar"),new Course(2, "Learn Java", "Bhaskar mUdaliyar"));
 	}
 }
