@@ -2,15 +2,17 @@ package com.practise.learning_spring_framework.games;
 
 public class GameRunner {
 
-	//private MarioGame game;
+	// private MarioGame game;
 
-	private SuperContra game;
-	
-	public GameRunner(SuperContra game) {
+	// private SuperContra game;
+
+	private GamingConsoleInterface game;
+
+	public GameRunner(GamingConsoleInterface game) {
 		super();
 		this.game = game;
 	}
-	
+
 	public void run() {
 		game.up();
 		game.down();
