@@ -141,3 +141,6 @@ ENTRYPOINT [ "sh", "-c", "java -jar /app.jar" ]
 
 #for ZIPKIN updates
 https://github.com/in28minutes/spring-microservices-v3/blob/main/v3-upgrade.md
+
+
+https://github.com/in28minutes/spring-microservices-v3/tree/main/04.docker
