@@ -1,0 +1,5 @@
+# Created at 2026-04-03T13:22:14.780
+Boot Manifest-JAR contains absolute paths in classpath 'D:\Bhaskar_Learning_and_Development\Udemy\Master-Microservices-with-Spring-Boot-and-Spring-Cloud-by-in28minutes\Bhaskar_code\Microservice\Hello-World-docker\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+
